@@ -1,16 +1,16 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = "lua-zlib"
-version = "0.4-1"
+version = "0.5-0"
 -- LuaDist source
 source = {
-  tag = "0.4-1",
+  tag = "0.5-0",
   url = "git://github.com/LuaDist-testing/lua-zlib.git"
 }
 -- Original source
 -- source = {
 --    url = "git://github.com/brimworks/lua-zlib.git",
---    tag = "v0.4",
+--    tag = "v0.5",
 -- }
 description = {
    summary = "Simple streaming interface to zlib for Lua.",
@@ -24,7 +24,7 @@ description = {
    license = "MIT"
 }
 dependencies = {
-   "lua >= 5.1, < 5.3"
+   "lua >= 5.1, <= 5.3"
 }
 external_dependencies = {
     ZLIB = {

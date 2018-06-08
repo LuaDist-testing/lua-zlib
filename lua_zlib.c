@@ -8,11 +8,16 @@
 /*
  * ** compatibility with Lua 5.2
  * */
-#if (LUA_VERSION_NUM == 502)
+#if (LUA_VERSION_NUM >= 502)
 #undef luaL_register
 #define luaL_register(L,n,f) \
                { if ((n) == NULL) luaL_setfuncs(L,f,0); else luaL_newlib(L,f); }
 
+#endif
+
+#if (LUA_VERSION_NUM >= 503)
+#undef luaL_optint
+#define luaL_optint(L,n,d)  ((int)luaL_optinteger(L,(n),(d)))
 #endif
 
 #define DEF_MEM_LEVEL 8
@@ -215,6 +220,7 @@ static void lz_create_deflate_mt(lua_State *L) {
 static int lz_deflate_new(lua_State *L) {
     int level = luaL_optint(L, 1, Z_DEFAULT_COMPRESSION);
     int window_size = luaL_optint(L, 2, MAX_WBITS);
+    int result;
 
     /*  Allocate the stream: */
     z_stream* stream = (z_stream*)lua_newuserdata(L, sizeof(z_stream));
@@ -222,7 +228,7 @@ static int lz_deflate_new(lua_State *L) {
     stream->zalloc = Z_NULL;
     stream->zfree  = Z_NULL;
 
-    int result = deflateInit2(stream, level, Z_DEFLATED, window_size,
+    result = deflateInit2(stream, level, Z_DEFLATED, window_size,
                               DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY);
 
     lz_assert(L, result, stream, __FILE__, __LINE__);

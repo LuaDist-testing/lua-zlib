@@ -1,22 +1,22 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = "lua-zlib"
-version = "1.0-0"
+version = "1.1-0"
 -- LuaDist source
 source = {
-  tag = "1.0-0",
+  tag = "1.1-0",
   url = "git://github.com/LuaDist-testing/lua-zlib.git"
 }
 -- Original source
 -- source = {
 --    url = "git://github.com/brimworks/lua-zlib.git",
---    tag = "v1.0",
+--    tag = "v1.1",
 -- }
 description = {
    summary = "Simple streaming interface to zlib for Lua.",
    detailed = [[
       Simple streaming interface to zlib for Lua.
-      Consists of two functions: inflate and deflate. 
+      Consists of two functions: inflate and deflate.
       Both functions return "stream functions" (takes a buffer of input and returns a buffer of output).
       This project is hosted on github.
    ]],
@@ -36,9 +36,15 @@ build = {
    type = "builtin",
    modules = {
       zlib = {
-         sources = { "lua_zlib.c" };
+         sources = { "lua_zlib.c" },
          libraries = { "z" },
          defines = { "LZLIB_COMPAT" },
-      };
+         incdirs = { "$(ZLIB_INCDIR)" },
+      }
+   },
+   platforms = {
+      windows = { modules = { zlib = { libraries = {
+         "$(ZLIB_LIBDIR)/zlib" -- Must full path to `"zlib"`, or else will cause the `LINK : fatal error LNK1149`
+      } } } }
    }
 }

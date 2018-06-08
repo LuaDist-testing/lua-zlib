@@ -1,9 +1,17 @@
+-- This file was automatically generated for the LuaDist project.
+
 package = "lua-zlib"
 version = "1.2-0"
+-- LuaDist source
 source = {
-   url = "git://github.com/brimworks/lua-zlib.git",
-   tag = "v1.2",
+  tag = "1.2-0",
+  url = "git://github.com/LuaDist-testing/lua-zlib.git"
 }
+-- Original source
+-- source = {
+--    url = "git://github.com/brimworks/lua-zlib.git",
+--    tag = "v1.2",
+-- }
 description = {
    summary = "Simple streaming interface to zlib for Lua.",
    detailed = [[

@@ -1,7 +1,8 @@
 package = "lua-zlib"
-version = "0.3-0"
+version = "0.3-1"
 source = {
-   url = "https://github.com/brimworks/lua-zlib.git"
+   url = "git://github.com/brimworks/lua-zlib.git",
+   tag = "v0.4",
 }
 description = {
    summary = "Simple streaming interface to zlib for Lua.",
@@ -26,6 +27,9 @@ external_dependencies = {
 build = {
    type = "builtin",
    modules = {
-     zlib = "lua_zlib.c"
+      zlib = {
+         sources = { "lua_zlib.c" };
+         libraries = { "z" },
+      };
    }
 }
